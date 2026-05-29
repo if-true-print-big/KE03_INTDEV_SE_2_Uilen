@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.Interfaces;
+using DataAccessLayer.Models;
 using KE03_INTDEV_SE_2_Base.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
 		}
 		public IActionResult Index()
 		{
+			List<Product> productsWithLowStock = _productrepository.GetProductsWithLowStock();
 			return View();
 		}
 	}

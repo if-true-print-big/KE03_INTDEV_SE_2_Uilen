@@ -34,6 +34,34 @@ namespace DataAccessLayer.Repositories
             return _context.Products.Include(p => p.Parts);
         }
 
+        public List<Product> GetAllProductsWithMininumStock()
+        {
+            List<Product> allProducts = GetAllProducts().ToList();
+            List<Product> allProductsWithMinimumStock = new List<Product>();
+            foreach (Product product in allProducts)
+            {
+                if (product.MinimumStock != null)
+                {
+                    allProductsWithMinimumStock.Add(product);
+                }
+            }
+            return allProductsWithMinimumStock;
+        }
+
+        public List<Product> GetProductsWithLowStock()
+        {
+            List<Product> productsWithMinimumStock = GetAllProductsWithMininumStock();
+            List<Product> productsWithLowStock = new List<Product>();
+            foreach(Product product in productsWithMinimumStock)
+            {
+                if (product.Stock < product.MinimumStock)
+                {
+                    productsWithLowStock.Add(product);
+                }
+            }
+            return productsWithLowStock;
+        }
+
         public Product? GetProductById(int id)
         {
             return _context.Products.Include(p => p.Parts).FirstOrDefault(p => p.Id == id);
