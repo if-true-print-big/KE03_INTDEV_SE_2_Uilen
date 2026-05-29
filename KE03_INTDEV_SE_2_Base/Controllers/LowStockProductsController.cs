@@ -17,8 +17,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
 		}
 		public IActionResult Index()
 		{
-			List<Product> productsWithLowStock = _productrepository.GetProductsWithLowStock();
-			return View();
+			return View(_productrepository.GetProductsWithLowStock());
 		}
 	}
 }
