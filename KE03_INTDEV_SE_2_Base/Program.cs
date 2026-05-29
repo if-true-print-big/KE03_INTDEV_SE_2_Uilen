@@ -19,10 +19,10 @@ namespace KE03_INTDEV_SE_2_Base
             builder.Services.AddControllersWithViews();
 
             // We registreren de repositories in de DI container
-            builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-            builder.Services.AddScoped<IProductRepository, ProductRepository>();
-            builder.Services.AddScoped<IPartRepository, PartRepository>();
+            builder.Services.AddScoped<CustomerRepository, CustomerRepository>();
+            builder.Services.AddScoped<OrderRepository, OrderRepository>();
+            builder.Services.AddScoped<ProductRepository, ProductRepository>();
+            builder.Services.AddScoped<PartRepository, PartRepository>();
 
             var app = builder.Build();
 
