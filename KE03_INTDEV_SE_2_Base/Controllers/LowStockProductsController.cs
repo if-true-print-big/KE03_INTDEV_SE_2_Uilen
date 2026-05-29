@@ -17,7 +17,10 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
 		}
 		public IActionResult Index()
 		{
-			return View(_productrepository.GetProductsWithLowStock());
+			LowStockProductsViewModel model = new LowStockProductsViewModel();
+			model.productsWithLowStock = _productrepository.GetProductsWithLowStock();
+			model.productsWithoutMinimumStock = _productrepository.GetAllProductsWithoutMinimumStock();
+			return View(model);
 		}
 	}
 }

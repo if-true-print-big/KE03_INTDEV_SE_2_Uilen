@@ -13,7 +13,9 @@ namespace DataAccessLayer.Interfaces
 
         public List<Product> GetAllProductsWithMininumStock();
 
-        public List<Product> GetProductsWithLowStock();
+		public List<Product> GetAllProductsWithoutMinimumStock();
+
+		public List<Product> GetProductsWithLowStock();
 
 		public Product? GetProductById(int id);
 

@@ -1,4 +1,4 @@
-﻿@model List<DataAccessLayer.Models.Product>
+﻿@model DataAccessLayer.Models.LowStockProductsViewModel
 @{
 	ViewData["Title"] = "Index";
 }
@@ -22,7 +22,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (DataAccessLayer.Models.Product Product in Model)
+        @foreach (DataAccessLayer.Models.Product Product in Model.productsWithLowStock)
         {
             <tr>
                 <td>
@@ -33,6 +33,36 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => Product.MinimumStock)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h1>Producten zonder minimum voorraad</h1>
+<p>Hier volgen alle producten waar minimum voorraad niet gedefinieerd is, zodat u de voorraad van deze producten niet uit het oog verliest.</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Naam
+            </th>
+            <th>
+                Voorraad
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (DataAccessLayer.Models.Product Product in Model.productsWithoutMinimumStock)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Product.Stock)
                 </td>
             </tr>
         }

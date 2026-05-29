@@ -48,6 +48,20 @@ namespace DataAccessLayer.Repositories
             return allProductsWithMinimumStock;
         }
 
+        public List<Product> GetAllProductsWithoutMinimumStock()
+        {
+			List<Product> allProducts = GetAllProducts().ToList();
+			List<Product> allProductsWithoutMinimumStock = new List<Product>();
+			foreach (Product product in allProducts)
+			{
+				if (product.MinimumStock == null)
+				{
+					allProductsWithoutMinimumStock.Add(product);
+				}
+			}
+			return allProductsWithoutMinimumStock;
+		}
+
         public List<Product> GetProductsWithLowStock()
         {
             List<Product> productsWithMinimumStock = GetAllProductsWithMininumStock();
