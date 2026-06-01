@@ -42,8 +42,10 @@ namespace DataAccessLayer
             {
                 new Product { Name = "Nebuchadnezzar", Description = "Het schip waarop Neo voor het eerst de echte wereld leert kennen", Price = 10000.00m, Stock = 10, MinimumStock = 5 },
                 new Product { Name = "Jack-in Chair", Description = "Stoel met een rugsteun en metalen armen waarin mensen zitten om ingeplugd te worden in de Matrix via een kabel in de nekpoort", Price = 500.50m, Stock = 50},
-                new Product { Name = "EMP (Electro-Magnetic Pulse) Device", Description = "Wapentuig op de schepen van Zion", Price = 129.99m, Stock = 100 }
-            };
+                new Product { Name = "EMP (Electro-Magnetic Pulse) Device", Description = "Wapentuig op de schepen van Zion", Price = 129.99m, Stock = 100 },
+                new Product { Name = "TIE fighter", Description = "Geïmporteerd ruimteschip uit een sterrenstelsel ver, ver hier vandaan", Price = 1000000.00m, Stock = 10, MinimumStock = 100},
+				new Product { Name = "Sevastopol", Description = "Het vlaggenschip van Groothertog Mark Sayadi Salemsky", Price = 150000.00m, Stock = 1, MinimumStock = 1}
+			};
             context.Products.AddRange(products);
 
             var parts = new Part[]
