@@ -49,12 +49,7 @@ namespace DataAccessLayer
 				new Location { Name = "Placeholder"}
             };
 
-			var stocks = new Stock[]
-            {
-				new Stock { Location = locations[0], Quantity = 10 },
-				new Stock { Location = locations[0], Quantity = 10}
-			};
-
+            
 			var products = new Product[]
             {
                 new Product { Name = "Nebuchadnezzar", Description = "Het schip waarop Neo voor het eerst de echte wereld leert kennen", Price = 10000.00m, MinimumStock = 5, Category = categories[0]},
@@ -63,9 +58,19 @@ namespace DataAccessLayer
                 new Product { Name = "TIE fighter", Description = "Geïmporteerd ruimteschip uit een sterrenstelsel ver, ver hier vandaan", Price = 1000000.00m, MinimumStock = 100, Category = categories[0]},
 				new Product { Name = "Sevastopol", Description = "Het vlaggenschip van Groothertog Mark Sayadi Salemsky", Price = 150000.00m, MinimumStock = 1, Category = categories[0]}
 			};
-            context.Products.AddRange(products);
+			context.Products.AddRange(products);
 
-            var parts = new Part[]
+			var stocks = new Stock[]
+            {
+				new Stock { Location = locations[0], Quantity = 10, Product = products[0]},
+				new Stock { Location = locations[0], Quantity = 50, Product = products[1]},
+				new Stock { Location = locations[0], Quantity = 100, Product = products[2]},
+				new Stock { Location = locations[0], Quantity = 10, Product = products[3]},
+				new Stock { Location = locations[0], Quantity = 1, Product = products[4]},
+            };
+			context.Stocks.AddRange(stocks);
+
+			var parts = new Part[]
             {
                 new Part { Name = "Tandwiel", Description = "Overdracht van rotatie in bijvoorbeeld de motor of luikmechanismen"},
                 new Part { Name = "M5 Boutje", Description = "Bevestiging van panelen, buizen of interne modules"},

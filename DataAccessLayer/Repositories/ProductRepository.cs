@@ -68,7 +68,8 @@ namespace DataAccessLayer.Repositories
             List<Product> productsWithLowStock = new List<Product>();
             foreach(Product product in productsWithMinimumStock)
             {
-                if (product.StockAcrossLocations() < product.MinimumStock)
+                int stock = product.StockAcrossLocations();
+                if (stock < product.MinimumStock)
                 {
                     productsWithLowStock.Add(product);
                 }
