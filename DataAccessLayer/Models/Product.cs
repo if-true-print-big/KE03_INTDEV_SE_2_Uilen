@@ -17,7 +17,6 @@ namespace DataAccessLayer.Models
 
         public decimal Price { get; set; }
 
-        public int Stock { get; set; }
 
         //this is the minimum amound the company can hold of a product before it gets added to a special list to help the admins keep stock.
         //TODO actually make this list
@@ -32,5 +31,15 @@ namespace DataAccessLayer.Models
 
         public ICollection<Review> Reviews { get; } = new List<Review>();
         public ICollection<Stock> Stocks { get; } = new List<Stock>();
+
+        public int StockAcrossLocations()
+        {
+            int stockAcrossLocations = 0;
+            foreach(Stock  stock in Stocks)
+            {
+                stockAcrossLocations += stock.Quantity;
+            }
+            return stockAcrossLocations;
+        }
     }
 }
