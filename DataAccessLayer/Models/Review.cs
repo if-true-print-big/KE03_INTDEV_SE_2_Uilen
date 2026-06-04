@@ -10,14 +10,13 @@ namespace DataAccessLayer.Models
     {
         public int Id { get; set; }
         public string Content { get; set; }
-        public int Rating { get; set; }
         public int CustomerId { get; set; }
         public Customer Customer { get; set; } = null!;
         public int ProductId { get; set; }
         public Product Product { get; set; } = null!;
 
         private int _rating;
-        public int rating
+        public int Rating
         {
             get => _rating;
             set => _rating = Math.Clamp(value, 1, 5);
