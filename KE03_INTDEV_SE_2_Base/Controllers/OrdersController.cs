@@ -20,10 +20,28 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         }
 
         // GET: Orders
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string orderNumber, string address)
         {
-            var matrixIncDbContext = _context.Orders.Include(o => o.Customer);
-            return View(await matrixIncDbContext.ToListAsync());
+            var orders = _context.Orders
+                .Include(o => o.Customer)
+                .AsQueryable();
+
+            if (int.TryParse(orderNumber, out int id))
+            {
+                orders = orders.Where(o => o.Id == id);
+            }
+            
+            // Address filter
+            if (!string.IsNullOrWhiteSpace(address))
+            {
+                orders = orders.Where(o =>
+                    o.Customer.Address.Contains(address));
+            }
+
+            ViewBag.OrderNumber = orderNumber;
+            ViewBag.Address = address;
+
+            return View(await orders.ToListAsync());
         }
 
         // GET: Orders/Details/5
