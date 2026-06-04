@@ -31,5 +31,6 @@ namespace DataAccessLayer.Models
         public ICollection<Part> Parts { get; } = new List<Part>();
 
         public ICollection<Review> Reviews { get; } = new List<Review>();
+        public ICollection<Stock> Stocks { get; } = new List<Stock>();
     }
 }
