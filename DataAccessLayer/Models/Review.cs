@@ -15,5 +15,12 @@ namespace DataAccessLayer.Models
         public Customer Customer { get; set; } = null!;
         public int ProductId { get; set; }
         public Product Product { get; set; } = null!;
+
+        private int _rating;
+        public int rating
+        {
+            get => _rating;
+            set => _rating = Math.Clamp(value, 1, 5);
+        }
     }
 }
