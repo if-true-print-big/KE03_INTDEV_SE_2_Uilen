@@ -13,6 +13,12 @@ namespace DataAccessLayer
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Part> Parts { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Complaint> Complaints { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Stock> Stocks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
