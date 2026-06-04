@@ -38,13 +38,30 @@ namespace DataAccessLayer
             };  
             context.Orders.AddRange(orders);
 
-            var products = new Product[]
+			var categories = new Category[]
             {
-                new Product { Name = "Nebuchadnezzar", Description = "Het schip waarop Neo voor het eerst de echte wereld leert kennen", Price = 10000.00m, Stock = 10, MinimumStock = 5 },
-                new Product { Name = "Jack-in Chair", Description = "Stoel met een rugsteun en metalen armen waarin mensen zitten om ingeplugd te worden in de Matrix via een kabel in de nekpoort", Price = 500.50m, Stock = 50},
-                new Product { Name = "EMP (Electro-Magnetic Pulse) Device", Description = "Wapentuig op de schepen van Zion", Price = 129.99m, Stock = 100 },
-                new Product { Name = "TIE fighter", Description = "Geïmporteerd ruimteschip uit een sterrenstelsel ver, ver hier vandaan", Price = 1000000.00m, Stock = 10, MinimumStock = 100},
-				new Product { Name = "Sevastopol", Description = "Het vlaggenschip van Groothertog Mark Sayadi Salemsky", Price = 150000.00m, Stock = 1, MinimumStock = 1}
+				new Category { Name = "Placeholder"}
+            };
+			context.Categories.AddRange(categories);
+
+			var locations = new Location[]
+            {
+				new Location { Name = "Placeholder"}
+            };
+
+			var stocks = new Stock[]
+            {
+				new Stock { Location = locations[0], Quantity = 10 },
+				new Stock { Location = locations[0], Quantity = 10}
+			};
+
+			var products = new Product[]
+            {
+                new Product { Name = "Nebuchadnezzar", Description = "Het schip waarop Neo voor het eerst de echte wereld leert kennen", Price = 10000.00m, MinimumStock = 5, Category = categories[0]},
+                new Product { Name = "Jack-in Chair", Description = "Stoel met een rugsteun en metalen armen waarin mensen zitten om ingeplugd te worden in de Matrix via een kabel in de nekpoort", Price = 500.50m, Category = categories[0]},
+                new Product { Name = "EMP (Electro-Magnetic Pulse) Device", Description = "Wapentuig op de schepen van Zion", Price = 129.99m, Category = categories[0]},
+                new Product { Name = "TIE fighter", Description = "Geïmporteerd ruimteschip uit een sterrenstelsel ver, ver hier vandaan", Price = 1000000.00m, MinimumStock = 100, Category = categories[0]},
+				new Product { Name = "Sevastopol", Description = "Het vlaggenschip van Groothertog Mark Sayadi Salemsky", Price = 150000.00m, MinimumStock = 1, Category = categories[0]}
 			};
             context.Products.AddRange(products);
 
@@ -57,7 +74,29 @@ namespace DataAccessLayer
             };
             context.Parts.AddRange(parts);
 
-            context.SaveChanges();
+            var addresses = new Address[]
+            {
+
+            };
+            context.Addresses.AddRange(addresses);
+
+            var complaints = new Complaint[]
+            {
+
+            };
+            context.Complaints.AddRange(complaints);
+
+            context.Locations.AddRange(locations);
+
+            var reviews = new Review[]
+            {
+
+            };
+            context.Reviews.AddRange(reviews);
+
+            context.Stocks.AddRange(stocks);
+
+			context.SaveChanges();
 
             context.Database.EnsureCreated();
         }
