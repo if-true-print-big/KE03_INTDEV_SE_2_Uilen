@@ -51,6 +51,14 @@ namespace DataAccessLayer
                 .HasForeignKey(r => r.ProductId)
                 .IsRequired();
 
+            modelBuilder.Entity<Category>()
+                .HasMany(c => c.Products)
+                .WithOne(p => p.Category);
+
+            modelBuilder.Entity<Stock>()
+                .HasOne(s => s.Product)
+                .WithMany(p => p.Stocks);
+
             base.OnModelCreating(modelBuilder);
         }
     }
