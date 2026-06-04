@@ -59,7 +59,23 @@ namespace DataAccessLayer
                 .HasOne(s => s.Product)
                 .WithMany(p => p.Stocks);
 
+            modelBuilder.Entity<Stock>()
+                .HasOne(s => s.Location)
+                .WithMany(l => l.Stocks);
+
+            modelBuilder.Entity<Complaint>()
+                .HasOne(c => c.Customer)
+                .WithMany(c => c.Complaints)
+                .HasForeignKey(c => c.CustomerId)
+                .IsRequired();
+            modelBuilder.Entity<Address>()
+                .HasOne(a => a.Customer)
+                .WithMany(c => c.Addresses)
+                .HasForeignKey(a => a.CustomerId)
+                .IsRequired();
+
             base.OnModelCreating(modelBuilder);
         }
     }
+
 }

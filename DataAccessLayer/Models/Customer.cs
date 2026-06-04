@@ -24,5 +24,8 @@ namespace DataAccessLayer.Models
         public ICollection<Order> Orders { get; } = new List<Order>();
 
         public ICollection<Review> Reviews { get; } = new List<Review>();
+        
+        public ICollection<Address> Addresses { get; } = new List<Address>();
+        public ICollection<Complaint> Complaints { get; } = new List<Complaint>();
     }
 }

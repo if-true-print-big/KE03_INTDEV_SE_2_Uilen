@@ -8,5 +8,11 @@ namespace DataAccessLayer.Models
 {
     public class Complaint
     {
+        public int Id { get; set; }
+        public string Description { get; set; }
+
+        public int CustomerId { get; set; }
+
+        public Customer Customer { get; set; } = null!;
     }
 }
