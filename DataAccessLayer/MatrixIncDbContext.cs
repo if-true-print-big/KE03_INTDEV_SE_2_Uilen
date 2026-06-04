@@ -40,6 +40,17 @@ namespace DataAccessLayer
                 .HasMany(p => p.Products)
                 .WithMany(p => p.Parts);
 
+            modelBuilder.Entity<Review>()
+                .HasOne(r => r.Customer)
+                .WithMany(c => c.Reviews)
+                .HasForeignKey(r => r.CustomerId).IsRequired();
+
+            modelBuilder.Entity<Review>()
+                .HasOne(r => r.Product)
+                .WithMany(p => p.Reviews)
+                .HasForeignKey(r => r.ProductId)
+                .IsRequired();
+
             base.OnModelCreating(modelBuilder);
         }
     }

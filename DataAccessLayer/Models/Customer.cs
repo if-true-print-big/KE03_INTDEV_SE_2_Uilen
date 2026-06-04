@@ -22,5 +22,7 @@ namespace DataAccessLayer.Models
         public bool Active { get; set; }
 
         public ICollection<Order> Orders { get; } = new List<Order>();
+
+        public ICollection<Review> Reviews { get; } = new List<Review>();
     }
 }
