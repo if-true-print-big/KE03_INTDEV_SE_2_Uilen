@@ -20,3 +20,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+
+
+.input-group{
+    width: 250px;
+    float: left;
+}
