@@ -3,6 +3,7 @@ using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
 using KE03_INTDEV_SE_2_Base.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace KE03_INTDEV_SE_2_Base.Controllers
 {
@@ -17,10 +18,23 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
 		}
 		public IActionResult Index()
 		{
-			ProductStockViewModel model = new ProductStockViewModel();
-			model.productsWithLowStock = _productrepository.GetProductsWithLowStock();
-			model.productsWithoutMinimumStock = _productrepository.GetAllProductsWithoutMinimumStock();
-			model.allproducts = _productrepository.GetAllProducts().ToList();
+			LowStockProductsViewModel model = new LowStockProductsViewModel();
+
+			var products = _context.Products
+			.Include(p => p.Stocks);
+			List<Product> productslist = products.ToList();
+
+			model.productsWithLowStock = _productrepository.GetProductsWithLowStock(productslist);
+			foreach (Product product in model.productsWithLowStock)
+			{
+				product.Stock = product.StockAcrossLocations();
+			}
+			model.productsWithoutMinimumStock = _productrepository.GetAllProductsWithoutMinimumStock(productslist);
+			foreach (Product product in model.productsWithoutMinimumStock)
+			{
+				product.Stock = product.StockAcrossLocations();
+			}
+			model.allproducts = productslist;
 			return View(model);
 		}
 	}
