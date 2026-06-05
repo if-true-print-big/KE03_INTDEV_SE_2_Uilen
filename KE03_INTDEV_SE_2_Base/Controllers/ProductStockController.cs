@@ -30,7 +30,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
 
 			model.allproducts = productslist;
 			model.productsWithLowStock = _productrepository.GetProductsWithLowStock(productslist);
-			model.productsWithoutMinimumStock = _productrepository.GetAllProductsWithoutMinimumStock(productslist);t;
+			model.productsWithoutMinimumStock = _productrepository.GetAllProductsWithoutMinimumStock(productslist);
 			return View(model);
 		}
 	}
