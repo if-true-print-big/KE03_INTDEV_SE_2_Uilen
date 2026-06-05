@@ -25,15 +25,19 @@
     </div>
 </form>
 
-<div class="productcard">
-    <div class="productInfo square"></div>
-    <div class="productInfo"><p>Serienummer: Hier komt het serienummer</p>
-        <p>Naam: Hier komt de naam</p>
+
+    @foreach (var item in Model)
+    {
+        <div class="productcard">
+        <div class="productImg"><div class="square"></div></div>
+        <div class="productInfo"><p>Serienummer: @Html.DisplayFor(modelItem => item.Id)</p>
+            <p>Naam: @Html.DisplayFor(modelItem => item.Name)</p>
         </div>
-    <div class="productInfo"><p>Beschrijving: Hier komt de beschrijving</p></div>
-    <div class="productInfo"><p>Prijs: Hier komt de prijs</p></div>
-    <div class="productInfo"><p>Voorraad: Hier komt de voorraad</p></div>
-</div>
+        <div class="productInfo"><p>Beschrijving: @Html.DisplayFor(modelItem => item.Description)</p></div>
+        <div class="productInfo"><p>Prijs: @Html.DisplayFor(modelItem => item.Price)</p></div>
+        <div class="productInfo"><p>Voorraad: @Html.DisplayFor(modelItem => item.MinimumStock)</p></div>
+        </div>
+    }
 
 <table class="table">
     <thead>
