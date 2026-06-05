@@ -34,11 +34,10 @@ namespace DataAccessLayer.Repositories
             return _context.Products.Include(p => p.Parts);
         }
 
-        public List<Product> GetAllProductsWithMininumStock()
+        public List<Product> GetAllProductsWithMininumStock(List<Product> products)
         {
-            List<Product> allProducts = GetAllProducts().ToList();
             List<Product> allProductsWithMinimumStock = new List<Product>();
-            foreach (Product product in allProducts)
+            foreach (Product product in products)
             {
                 if (product.MinimumStock != null)
                 {
@@ -48,11 +47,10 @@ namespace DataAccessLayer.Repositories
             return allProductsWithMinimumStock;
         }
 
-        public List<Product> GetAllProductsWithoutMinimumStock()
+        public List<Product> GetAllProductsWithoutMinimumStock(List<Product> products)
         {
-			List<Product> allProducts = GetAllProducts().ToList();
 			List<Product> allProductsWithoutMinimumStock = new List<Product>();
-			foreach (Product product in allProducts)
+			foreach (Product product in products)
 			{
 				if (product.MinimumStock == null)
 				{
@@ -62,13 +60,14 @@ namespace DataAccessLayer.Repositories
 			return allProductsWithoutMinimumStock;
 		}
 
-        public List<Product> GetProductsWithLowStock()
+        public List<Product> GetProductsWithLowStock(List<Product> products)
         {
-            List<Product> productsWithMinimumStock = GetAllProductsWithMininumStock();
+            List<Product> productsWithMinimumStock = GetAllProductsWithMininumStock(products);
             List<Product> productsWithLowStock = new List<Product>();
             foreach(Product product in productsWithMinimumStock)
             {
-                if (product.Stock < product.MinimumStock)
+                int stock = product.StockAcrossLocations();
+                if (stock < product.MinimumStock)
                 {
                     productsWithLowStock.Add(product);
                 }

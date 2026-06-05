@@ -11,11 +11,11 @@ namespace DataAccessLayer.Interfaces
     {
         public IEnumerable<Product> GetAllProducts();
 
-        public List<Product> GetAllProductsWithMininumStock();
+        public List<Product> GetAllProductsWithMininumStock(List<Product> products);
 
-		public List<Product> GetAllProductsWithoutMinimumStock();
+		public List<Product> GetAllProductsWithoutMinimumStock(List<Product> products);
 
-		public List<Product> GetProductsWithLowStock();
+		public List<Product> GetProductsWithLowStock(List<Product> products);
 
 		public Product? GetProductById(int id);
 
