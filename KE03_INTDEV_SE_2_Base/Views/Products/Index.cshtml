@@ -35,7 +35,10 @@
         </div>
         <div class="productInfo"><p>Beschrijving: @Html.DisplayFor(modelItem => item.Description)</p></div>
         <div class="productInfo"><p>Prijs: @Html.DisplayFor(modelItem => item.Price)</p></div>
-        <div class="productInfo"><p>Voorraad: @Html.DisplayFor(modelItem => item.MinimumStock)</p></div>
+        <div class="productInfo"><p>Voorraad: @Html.DisplayFor(modelItem => item.Stock)</p></div>
+        <div class="productInfo"><a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a></div>
         </div>
     }
 
