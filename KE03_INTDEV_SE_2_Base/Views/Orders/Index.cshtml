@@ -4,74 +4,88 @@
     ViewData["Title"] = "Orders";
 }
 
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <div class="row">
 
-    <!-- Filter Sidebar -->
-    <form asp-action="Index" method="get">
+    <!-- Left sidebar -->
+    <div class="col-md-3">
 
-        <div class="mb-3">
-            <label>Order Number</label>
-            <input name="orderNumber"
-                   value="@ViewBag.OrderNumber"
-                   class="form-control" />
-        </div>
+        <h4>Filters</h4>
 
-        <div class="mb-3">
-            <label>Address</label>
-            <input name="address"
-                   value="@ViewBag.Address"
-                   class="form-control" />
-        </div>
+        <!-- Filter Sidebar -->
+        <form asp-action="Index" method="get">
 
-        <button type="submit" class="btn btn-primary">
-            Search
-        </button>
-        
-        <a asp-action="Index" class="btn btn-secondary">
-            Reset
-        </a>
-    </form>
+            <div class="mb-3">
+                <label>Order Number</label>
+                <input name="orderNumber"
+                       value="@ViewBag.OrderNumber"
+                       class="form-control" />
+            </div>
 
+            <div class="mb-3">
+                <label>Address</label>
+                <input name="address"
+                       value="@ViewBag.Address"
+                       class="form-control" />
+            </div>
 
-    <!-- Orders Table -->
-    <div class="col-md-9">
-        <h2>Orders</h2>
+            <button type="submit" class="btn btn-primary">
+                Search
+            </button>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Order Number</th>
-                    <th>Order Date</th>
-                    <th>Customer</th>
-                    <th></th>
-                </tr>
-            </thead>
+            <a asp-action="Index" class="btn btn-secondary">
+                Reset
+            </a>
+        </form>
 
-            <tbody>
-                @foreach (var item in Model)
-                {
+    </div>
+
+    <!-- Main content -->
+            <div class="col-md-9">
+            <h2>Orders</h2>
+
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>@item.Id</td>
-                        <td>@item.OrderDate</td>
-                        <td>@item.Customer?.Address</td>
-
-                        <td>
-                            <a asp-action="Details"
-                               asp-route-id="@item.Id"
-                               class="btn btn-info btn-sm">
-                                Details
-                            </a>
-
-                            <a asp-action="Delete"
-                               asp-route-id="@item.Id"
-                               class="btn btn-danger btn-sm">
-                                Delete
-                            </a>
-                        </td>
+                        <th>Order Number</th>
+                        <th>Order Date</th>
+                        <th>Customer</th>
+                        <th>Address</th>
+                        <th>Status</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.OrderDate</td>
+                            <td>@item.Customer?.Name</td>
+                            <td>@item.Customer?.Address</td>
+                            <td>@item.Status</td>
+
+                            <td>
+                                <a asp-action="Details"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-info btn-sm">
+                                    Details
+                                </a>
+
+                                <a asp-action="Delete"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-danger btn-sm">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
     </div>
 
 </div>
+
