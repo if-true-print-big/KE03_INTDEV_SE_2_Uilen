@@ -38,6 +38,9 @@ body {
     flex-direction: row;
     align-items: flex-start;
     gap: 20px;
+    background-color: lightgray;
+    border-radius: 5px;
+    border: 2px solid #ccc;
 }
 .productInfo{
     margin-right: 15px;
