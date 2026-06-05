@@ -18,22 +18,19 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
 		}
 		public IActionResult Index()
 		{
-			LowStockProductsViewModel model = new LowStockProductsViewModel();
+			ProductStockViewModel model = new ProductStockViewModel();
 
 			var products = _context.Products
 			.Include(p => p.Stocks);
 			List<Product> productslist = products.ToList();
+			foreach (Product product in productslist)
+			{
+				product.Stock = product.StockAcrossLocations();
+			}
 
+			model.allproducts = productslist;
 			model.productsWithLowStock = _productrepository.GetProductsWithLowStock(productslist);
-			foreach (Product product in model.productsWithLowStock)
-			{
-				product.Stock = product.StockAcrossLocations();
-			}
 			model.productsWithoutMinimumStock = _productrepository.GetAllProductsWithoutMinimumStock(productslist);
-			foreach (Product product in model.productsWithoutMinimumStock)
-			{
-				product.Stock = product.StockAcrossLocations();
-			}
 			model.allproducts = productslist;
 			return View(model);
 		}
