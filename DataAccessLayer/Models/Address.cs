@@ -8,6 +8,7 @@ namespace DataAccessLayer.Models
 {
     public class Address
     {
+        //wordt niet gebruikt
         public int Id { get; set; }
         public string AddressLine { get; set; }
         public int CustomerId { get; set; }
