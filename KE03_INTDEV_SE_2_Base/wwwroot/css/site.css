@@ -26,5 +26,23 @@ body {
 
 .input-group{
     width: 250px;
-    float: left;
+    margin-bottom: 20px;
+}
+
+.productcard {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 10px;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.productInfo{
+    margin-right: 15px;
+}
+
+.square {
+    height: 100px;
+    width: 100px;
+    background-color: #555;
 }
