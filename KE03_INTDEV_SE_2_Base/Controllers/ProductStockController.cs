@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KE03_INTDEV_SE_2_Base.Controllers
 {
-	public class LowStockProductsController : Controller
+	public class ProductStockController : Controller
 	{
 		private readonly MatrixIncDbContext _context;
 		private readonly IProductRepository _productrepository;
-		public LowStockProductsController(MatrixIncDbContext context, IProductRepository productrepository) 
+		public ProductStockController(MatrixIncDbContext context, IProductRepository productrepository) 
 		{
 			_context = context;
 			_productrepository = productrepository;
@@ -25,7 +25,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
 			List<Product> productslist = products.ToList();
 
 			model.productsWithLowStock = _productrepository.GetProductsWithLowStock(productslist);
-			foreach(Product product in model.productsWithLowStock)
+			foreach (Product product in model.productsWithLowStock)
 			{
 				product.Stock = product.StockAcrossLocations();
 			}
@@ -34,6 +34,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
 			{
 				product.Stock = product.StockAcrossLocations();
 			}
+			model.allproducts = productslist;
 			return View(model);
 		}
 	}

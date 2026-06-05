@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Models
 {
-	public class LowStockProductsViewModel
+	public class ProductStockViewModel
 	{
 		public List<Product> productsWithLowStock { get; set; }
 
 		public List<Product> productsWithoutMinimumStock { get; set; }
+
+		public List<Product> allproducts { get; set; }
 	}
 }
