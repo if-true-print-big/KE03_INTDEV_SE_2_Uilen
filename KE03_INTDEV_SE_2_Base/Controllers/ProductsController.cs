@@ -102,7 +102,6 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
             {
                 try
                 {
-                    product.Category = null;
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
