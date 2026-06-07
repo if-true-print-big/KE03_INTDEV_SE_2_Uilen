@@ -29,15 +29,6 @@ namespace DataAccessLayer
             };
             context.Customers.AddRange(customers);
 
-            var orders = new Order[]
-            {
-                new Order { Customer = customers[0], OrderDate = DateTime.Parse("2021-01-01")},
-                new Order { Customer = customers[0], OrderDate = DateTime.Parse("2021-02-01")},
-                new Order { Customer = customers[1], OrderDate = DateTime.Parse("2021-02-01")},
-                new Order { Customer = customers[2], OrderDate = DateTime.Parse("2021-03-01"), Status = Order.OrderStatus.Error}
-            };  
-            context.Orders.AddRange(orders);
-
 			var categories = new Category[]
             {
 				new Category { Name = "Placeholder"},
@@ -50,18 +41,26 @@ namespace DataAccessLayer
 				new Location { Name = "Placeholder"}
             };
 
-            
-			var products = new Product[]
-            {
+            var products = new Product[]
+{
                 new Product { Name = "Nebuchadnezzar", Description = "Het schip waarop Neo voor het eerst de echte wereld leert kennen", Price = 10000.00m, MinimumStock = 5, Category = categories[0]},
                 new Product { Name = "Jack-in Chair", Description = "Stoel met een rugsteun en metalen armen waarin mensen zitten om ingeplugd te worden in de Matrix via een kabel in de nekpoort", Price = 500.50m, Category = categories[0]},
                 new Product { Name = "EMP (Electro-Magnetic Pulse) Device", Description = "Wapentuig op de schepen van Zion", Price = 129.99m, Category = categories[0]},
                 new Product { Name = "TIE fighter", Description = "Geïmporteerd ruimteschip uit een sterrenstelsel ver, ver hier vandaan", Price = 1000000.00m, MinimumStock = 100, Category = categories[0]},
-				new Product { Name = "Sevastopol", Description = "Het vlaggenschip van Groothertog Mark Sayadi Salemsky", Price = 150000.00m, MinimumStock = 1, Category = categories[0]}
-			};
-			context.Products.AddRange(products);
+                new Product { Name = "Sevastopol", Description = "Het vlaggenschip van Groothertog Mark Sayadi Salemsky", Price = 150000.00m, MinimumStock = 1, Category = categories[0]}
+};
+            context.Products.AddRange(products);
 
-			var stocks = new Stock[]
+            var orders = new Order[]
+            {
+                new Order { Customer = customers[0], OrderDate = DateTime.Parse("2021-01-01"), Products = [products[1], products[2]]},
+                new Order { Customer = customers[0], OrderDate = DateTime.Parse("2021-02-01"), Products = [products[1], products[3], products[3]]},
+                new Order { Customer = customers[1], OrderDate = DateTime.Parse("2021-02-01"), Products = [products[3], products[2]]},
+                new Order { Customer = customers[2], OrderDate = DateTime.Parse("2021-03-01"), Products = [products[4], products[0]]},
+            };
+            context.Orders.AddRange(orders);
+
+            var stocks = new Stock[]
             {
 				new Stock { Location = locations[0], Quantity = 10, Product = products[0]},
 				new Stock { Location = locations[0], Quantity = 50, Product = products[1]},

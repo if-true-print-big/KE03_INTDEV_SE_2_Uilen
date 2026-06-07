@@ -30,6 +30,42 @@
         </dd>
     </dl>
 </div>
+
+<div>
+    <h4>Bestelgeschiedenis</h4>
+    <hr />
+    @if (Model.Orders.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Bestelling nummer</th>
+                    <th>Datum</th>
+                    <th>Klant ID</th>
+                    <th>Klant Naam</th>
+                    <th>Bestelling</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model.Orders)
+                {
+                    <tr>
+                        <td>@order.Id</td>
+                        <td>@order.OrderDate</td>
+                        <td>@order.CustomerId</td>
+                        <td>@order.Customer.Name</td>
+                        <td>@string.Join(", ", order.Products.Select(p => p.Name))</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Er zijn geen bestellingen.</p>
+    }
+</div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
