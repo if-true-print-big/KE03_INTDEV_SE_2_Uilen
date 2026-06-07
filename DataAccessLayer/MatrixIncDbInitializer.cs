@@ -31,7 +31,8 @@ namespace DataAccessLayer
 
 			var categories = new Category[]
             {
-				new Category { Name = "Placeholder"}
+				new Category { Name = "Placeholder"},
+                new Category { Id = 2, Name = "ruimteschepen"}
             };
 			context.Categories.AddRange(categories);
 
@@ -78,15 +79,17 @@ namespace DataAccessLayer
             };
             context.Parts.AddRange(parts);
 
+            
+
             var addresses = new Address[]
             {
-
+                //niet vullen
             };
             context.Addresses.AddRange(addresses);
 
             var complaints = new Complaint[]
             {
-
+                new Complaint {Description = "Lelijke site", Customer = customers[0], Status = Complaint.ComplaintStatus.Open}
             };
             context.Complaints.AddRange(complaints);
 

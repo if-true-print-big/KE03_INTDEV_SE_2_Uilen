@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DataAccessLayer;
+using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DataAccessLayer;
-using DataAccessLayer.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using static DataAccessLayer.Models.Order;
 
 namespace KE03_INTDEV_SE_2_Base.Controllers
 {
@@ -20,10 +21,40 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         }
 
         // GET: Orders
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string orderNumber, string address, string customerName, string status)
         {
-            var matrixIncDbContext = _context.Orders.Include(o => o.Customer);
-            return View(await matrixIncDbContext.ToListAsync());
+            var orders = _context.Orders
+                .Include(o => o.Customer)
+                .AsQueryable();
+
+            if (int.TryParse(orderNumber, out int id))
+            {
+                orders = orders.Where(o => o.Id == id);
+            }
+            
+            // Address filter
+            if (!string.IsNullOrWhiteSpace(address))
+            {
+                orders = orders.Where(o =>
+                    o.Customer.Address.Contains(address));
+            }
+            
+            if (!string.IsNullOrWhiteSpace(customerName))
+            {
+                orders = orders.Where(o =>
+                    o.Customer.Name.Contains(customerName));
+            }
+
+            if (!string.IsNullOrWhiteSpace(status) &&
+                Enum.TryParse<Order.OrderStatus>(status, out var selectedStatus))
+            {
+                orders = orders.Where(o => o.Status == selectedStatus);
+            }
+
+            ViewBag.OrderNumber = orderNumber;
+            ViewBag.Address = address;
+
+            return View(await orders.ToListAsync());
         }
 
         // GET: Orders/Details/5
@@ -57,7 +88,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrderDate,CustomerId")] Order order)
+        public async Task<IActionResult> Create([Bind("Id,OrderDate,CustomerId,Status")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +122,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderDate,CustomerId")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderDate,CustomerId,Status")] Order order)
         {
             if (id != order.Id)
             {

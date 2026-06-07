@@ -25,7 +25,7 @@ namespace DataAccessLayer.Models
         public int? MinimumStock { get; set; }
 
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
 
         public ICollection<Order> Orders { get; } = new List<Order>();
 
