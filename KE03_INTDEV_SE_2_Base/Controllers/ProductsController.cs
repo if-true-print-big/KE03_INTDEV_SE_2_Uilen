@@ -102,6 +102,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
             {
                 try
                 {
+                    product.Category = null;
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
@@ -118,6 +119,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ModelState.Clear();
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
             return View(product);
         }
