@@ -10,23 +10,23 @@ using DataAccessLayer.Models;
 
 namespace KE03_INTDEV_SE_2_Base.Controllers
 {
-    public class ProductsController : Controller
+    public class ComplaintsController : Controller
     {
         private readonly MatrixIncDbContext _context;
 
-        public ProductsController(MatrixIncDbContext context)
+        public ComplaintsController(MatrixIncDbContext context)
         {
             _context = context;
         }
 
-        // GET: Products
-        //public async Task<IActionResult> Index()
-        //{
-        //    var matrixIncDbContext = _context.Products.Include(p => p.Category);
-        //    return View(await matrixIncDbContext.ToListAsync());
-        //}
+        // GET: Complaints
+        public async Task<IActionResult> Index()
+        {
+            var matrixIncDbContext = _context.Complaints.Include(c => c.Customer);
+            return View(await matrixIncDbContext.ToListAsync());
+        }
 
-        // GET: Products/Details/5
+        // GET: Complaints/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +34,42 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .Include(p => p.Category)
+            var complaint = await _context.Complaints
+                .Include(c => c.Customer)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (product == null)
+            if (complaint == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(complaint);
         }
 
-        // GET: Products/Create
+        // GET: Complaints/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Address");
             return View();
         }
 
-        // POST: Products/Create
+        // POST: Complaints/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,MinimumStock,CategoryId")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Description,CustomerId,Status")] Complaint complaint)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
+                _context.Add(complaint);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
-            return View(product);
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Address", complaint.CustomerId);
+            return View(complaint);
         }
 
-        // GET: Products/Edit/5
+        // GET: Complaints/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +77,23 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
+            var complaint = await _context.Complaints.FindAsync(id);
+            if (complaint == null)
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
-            return View(product);
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Address", complaint.CustomerId);
+            return View(complaint);
         }
 
-        // POST: Products/Edit/5
+        // POST: Complaints/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Price,MinimumStock,CategoryId")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Description,CustomerId,Status")] Complaint complaint)
         {
-            if (id != product.Id)
+            if (id != complaint.Id)
             {
                 return NotFound();
             }
@@ -102,12 +102,12 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
             {
                 try
                 {
-                    _context.Update(product);
+                    _context.Update(complaint);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductExists(product.Id))
+                    if (!ComplaintExists(complaint.Id))
                     {
                         return NotFound();
                     }
@@ -118,12 +118,11 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ModelState.Clear();
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
-            return View(product);
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Address", complaint.CustomerId);
+            return View(complaint);
         }
 
-        // GET: Products/Delete/5
+        // GET: Complaints/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,50 +130,35 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .Include(p => p.Category)
+            var complaint = await _context.Complaints
+                .Include(c => c.Customer)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (product == null)
+            if (complaint == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(complaint);
         }
 
-        // POST: Products/Delete/5
+        // POST: Complaints/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product != null)
+            var complaint = await _context.Complaints.FindAsync(id);
+            if (complaint != null)
             {
-                _context.Products.Remove(product);
+                _context.Complaints.Remove(complaint);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductExists(int id)
+        private bool ComplaintExists(int id)
         {
-            return _context.Products.Any(e => e.Id == id);
-        }
-
-        //GET: producten zoeken
-        public async Task<IActionResult> Index(string searchString)
-        {
-            var products = _context.Products.Include(p => p.Category).AsQueryable();
-
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                products = products.Where(p =>
-                    p.Name.Contains(searchString) ||
-                    p.Description.Contains(searchString) ||
-                    p.Category.Name.Contains(searchString));
-            }
-            return View(await products.ToListAsync());
+            return _context.Complaints.Any(e => e.Id == id);
         }
     }
 }
