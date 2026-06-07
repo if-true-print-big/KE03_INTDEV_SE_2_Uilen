@@ -21,8 +21,54 @@ body {
   margin-bottom: 60px;
 }
 
+
 main {
     margin-left: 10%;
+}
+
+.input-group{
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+.productcard {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 10px;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+    background-color: lightgray;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+}
+.productInfo{
+    margin-right: 15px;
+    width: 250px
+}
+
+.square {
+    height: 100px;
+    width: 100px;
+    background-color: #555;
+}
+
+.productImg {
+    flex-shrink: 0;
+}
+
+.ProductDisplay{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.productInfo2 {
+    width: 700px;
+    margin-right: 15px;
 }
 
 /*Deze classes zijn, met een paar aanpassingen, gekopieerd van https://www.w3schools.com/w3css/5/w3.css */
@@ -53,4 +99,4 @@ main {
 .w3-button {
     white-space: normal;
     color: #000
-}
+      

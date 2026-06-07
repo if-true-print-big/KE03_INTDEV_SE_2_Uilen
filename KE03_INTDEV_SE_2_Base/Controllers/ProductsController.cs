@@ -20,11 +20,11 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
-        {
-            var matrixIncDbContext = _context.Products.Include(p => p.Category);
-            return View(await matrixIncDbContext.ToListAsync());
-        }
+        //public async Task<IActionResult> Index()
+        //{
+        //    var matrixIncDbContext = _context.Products.Include(p => p.Category);
+        //    return View(await matrixIncDbContext.ToListAsync());
+        //}
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -118,6 +118,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ModelState.Clear();
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
             return View(product);
         }
@@ -159,6 +160,21 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.Id == id);
+        }
+
+        //GET: producten zoeken
+        public async Task<IActionResult> Index(string searchString)
+        {
+            var products = _context.Products.Include(p => p.Category).AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(p =>
+                    p.Name.Contains(searchString) ||
+                    p.Description.Contains(searchString) ||
+                    p.Category.Name.Contains(searchString));
+            }
+            return View(await products.ToListAsync());
         }
     }
 }
