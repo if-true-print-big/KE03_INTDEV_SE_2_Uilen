@@ -13,6 +13,14 @@ namespace DataAccessLayer.Models
 
         public int CustomerId { get; set; }
 
+        public enum ComplaintStatus
+        {
+            Open,
+            Resolved
+        }
+
+        public ComplaintStatus Status { get; set; }
+
         public Customer Customer { get; set; } = null!;
     }
 }
