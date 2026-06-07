@@ -21,7 +21,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         }
 
         // GET: Orders
-        public async Task<IActionResult> Index(string orderNumber, string address)
+        public async Task<IActionResult> Index(string orderNumber, string address, string customerName, string status)
         {
             var orders = _context.Orders
                 .Include(o => o.Customer)
@@ -37,6 +37,18 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
             {
                 orders = orders.Where(o =>
                     o.Customer.Address.Contains(address));
+            }
+            
+            if (!string.IsNullOrWhiteSpace(customerName))
+            {
+                orders = orders.Where(o =>
+                    o.Customer.Name.Contains(customerName));
+            }
+
+            if (!string.IsNullOrWhiteSpace(status) &&
+                Enum.TryParse<Order.OrderStatus>(status, out var selectedStatus))
+            {
+                orders = orders.Where(o => o.Status == selectedStatus);
             }
 
             ViewBag.OrderNumber = orderNumber;
@@ -76,7 +88,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrderDate,CustomerId")] Order order)
+        public async Task<IActionResult> Create([Bind("Id,OrderDate,CustomerId,Status")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -110,7 +122,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderDate,CustomerId")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderDate,CustomerId,Status")] Order order)
         {
             if (id != order.Id)
             {
