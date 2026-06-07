@@ -40,7 +40,8 @@ namespace DataAccessLayer
 
 			var categories = new Category[]
             {
-				new Category { Name = "Placeholder"}
+				new Category { Name = "Placeholder"},
+                new Category { Id = 2, Name = "ruimteschepen"}
             };
 			context.Categories.AddRange(categories);
 
@@ -78,6 +79,8 @@ namespace DataAccessLayer
                 new Part { Name = "Koelvloeistofpomp", Description = "Koeling van de motor of elektronische systemen."}
             };
             context.Parts.AddRange(parts);
+
+            
 
             var addresses = new Address[]
             {
