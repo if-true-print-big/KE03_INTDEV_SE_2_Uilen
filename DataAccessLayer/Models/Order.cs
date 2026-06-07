@@ -24,7 +24,7 @@ namespace DataAccessLayer.Models
 
         public OrderStatus Status { get; set; }
 
-        public Customer Customer { get; set; } = null!;
+        public Customer? Customer { get; set; }
 
         public ICollection<Product> Products { get; set; } = new List<Product>();
     }
