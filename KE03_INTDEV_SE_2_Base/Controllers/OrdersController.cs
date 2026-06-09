@@ -53,6 +53,8 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
 
             ViewBag.OrderNumber = orderNumber;
             ViewBag.Address = address;
+            ViewBag.CustomerName = customerName;
+            ViewBag.Status = status;
 
             return View(await orders.ToListAsync());
         }

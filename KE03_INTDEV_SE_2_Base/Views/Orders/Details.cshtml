@@ -54,9 +54,8 @@
     </div>
 
     <div class="card-footer">
-
         <a asp-action="Edit"
-           asp-route-id="@Model.Id"
+           asp-route-id="@Model?.Id"
            class="btn btn-warning">
             Edit
         </a>
@@ -65,7 +64,6 @@
            class="btn btn-secondary">
             Back
         </a>
-
     </div>
 
 </div>

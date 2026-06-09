@@ -22,7 +22,7 @@
                         <span asp-validation-for="OrderDate" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="CustomerId" class="control-label"></label>
+                        <label class="control-label">Address</label>
                         <select asp-for="CustomerId" class ="form-control" asp-items="ViewBag.CustomerId"></select>
                     </div>
                     <div class="form-group">
@@ -34,18 +34,23 @@
                             <option value="Error">Something went wrong</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-primary" />
-                    </div>
                     <div asp-validation-summary="All"
                          class="text-danger">
                     </div>
                 </form>
             </div>
         </div>
+        <div class="card-footer">
 
-        <div>
-            <a asp-action="Index">Back to List</a>
+            <input type="submit"
+                   value="Create"
+                   class="btn btn-primary" />
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+                Back
+            </a>
+
         </div>
     </div>
 </div>
