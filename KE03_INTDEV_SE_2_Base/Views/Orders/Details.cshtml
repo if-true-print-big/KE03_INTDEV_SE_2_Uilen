@@ -15,14 +15,14 @@
         <dl class="row">
 
             <dt class="col-sm-3">
-                Order Number
+                Order Nummer
             </dt>
             <dd class="col-sm-9">
                 @Model.Id
             </dd>
 
             <dt class="col-sm-3">
-                Order Date
+                Order Datum
             </dt>
             <dd class="col-sm-9">
                 @Model.OrderDate
@@ -36,14 +36,14 @@
             </dd>
 
             <dt class="col-sm-3">
-                Customer
+                Klant
             </dt>
             <dd class="col-sm-9">
                 @Model.Customer?.Name
             </dd>
 
             <dt class="col-sm-3">
-                Address
+                Adres
             </dt>
             <dd class="col-sm-9">
                 @Model.Customer?.Address
@@ -58,12 +58,12 @@
         <a asp-action="Edit"
            asp-route-id="@Model.Id"
            class="btn btn-warning">
-            Edit
+            Bewerken
         </a>
 
         <a asp-action="Index"
            class="btn btn-secondary">
-            Back
+            Terug
         </a>
 
     </div>

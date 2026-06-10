@@ -6,7 +6,7 @@
 
 <div class="card shadow-sm">
     <div class="card-header">
-        <h1>Edit</h1>
+        <h1>Bewerken</h1>
 
         <h4>Order</h4>
     </div>
@@ -20,12 +20,12 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Id" />
                     <div class="form-group">
-                        <label asp-for="OrderDate" class="control-label"></label>
+                        <label asp-for="OrderDate" class="control-label">Datum</label>
                         <input asp-for="OrderDate" class="form-control" />
                         <span asp-validation-for="OrderDate" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="CustomerId" class="control-label"></label>
+                        <label asp-for="CustomerId" class="control-label">Klant</label>
                         <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
                         <span asp-validation-for="CustomerId" class="text-danger"></span>
                     </div>
@@ -33,13 +33,13 @@
                         <label asp-for="Status"></label>
 
                         <select asp-for="Status" class="form-control">
-                            <option value="Received">Received</option>
-                            <option value="Sent">Sent</option>
-                            <option value="Error">Something went wrong</option>
+                            <option value="Ontvangen">Ontvangen</option>
+                            <option value="Verzonden">Verzonden</option>
+                            <option value="Error">Error</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <input type="submit" value="Opslaan" class="btn btn-primary" />
                     </div>
                     <div asp-validation-summary="All"
                          class="text-danger">
@@ -48,7 +48,7 @@
             </div>
         </div>
         <div>
-            <a asp-action="Index">Back to List</a>
+            <a asp-action="Index">Terug naar Lijst</a>
         </div>
     </div>
 </div>
