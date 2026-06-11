@@ -17,8 +17,8 @@ namespace DataAccessLayer.Models
 
         public enum OrderStatus
         {
-            Received,
-            Sent,
+            Ontvangen,
+            Verzonden,
             Error
         }
 

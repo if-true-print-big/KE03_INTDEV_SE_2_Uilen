@@ -19,6 +19,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
             _context = context;
         }
 
+        //TODO: zorg dat de edit functie werkt.
         // GET: Complaints
         public async Task<IActionResult> Index()
         {

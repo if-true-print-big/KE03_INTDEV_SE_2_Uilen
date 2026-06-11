@@ -6,7 +6,7 @@
 
 <div class="card shadow-sm">
     <div class="card-header">
-        <h1>Edit</h1>
+        <h1>Bewerken</h1>
 
         <h4>Order</h4>
     </div>
@@ -20,7 +20,7 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Id" />
                     <div class="form-group">
-                        <label asp-for="OrderDate" class="control-label"></label>
+                        <label asp-for="OrderDate" class="control-label">Datum</label>
                         <input asp-for="OrderDate" class="form-control" />
                         <span asp-validation-for="OrderDate" class="text-danger"></span>
                     </div>
@@ -33,9 +33,9 @@
                         <label asp-for="Status"></label>
 
                         <select asp-for="Status" class="form-control">
-                            <option value="Received">Received</option>
-                            <option value="Sent">Sent</option>
-                            <option value="Error">Something went wrong</option>
+                            <option value="Ontvangen">Ontvangen</option>
+                            <option value="Verzonden">Verzonden</option>
+                            <option value="Error">Error</option>
                         </select>
                     </div>
                     <div asp-validation-summary="All"
@@ -48,12 +48,12 @@
     <div class="card-footer">
 
         <input type="submit"
-               value="Save"
+               value="Opslaan"
                class="btn btn-primary" />
 
         <a asp-action="Index"
            class="btn btn-secondary">
-            Back
+            Terug naar Lijst
         </a>
 
     </div>
