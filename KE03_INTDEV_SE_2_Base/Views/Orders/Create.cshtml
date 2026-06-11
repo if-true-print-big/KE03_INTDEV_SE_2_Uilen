@@ -21,7 +21,7 @@
                         <span asp-validation-for="OrderDate" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="CustomerId" class="control-label">Klant</label>
+                        <label class="control-label">Address</label>
                         <select asp-for="CustomerId" class ="form-control" asp-items="ViewBag.CustomerId"></select>
                     </div>
                     <div class="form-group">
@@ -33,18 +33,22 @@
                             <option value="Error">Error</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <input type="submit" value="Bevestigen" class="btn btn-primary" />
-                    </div>
                     <div asp-validation-summary="All"
                          class="text-danger">
                     </div>
                 </form>
             </div>
         </div>
+        <div class="card-footer">
 
-        <div>
-            <a asp-action="Index">Terug naar Lijst</a>
+            <input type="submit"
+                   value="Bevestigen"
+                   class="btn btn-primary" />
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+                Terug naar Lijst
+            </a>
         </div>
     </div>
 </div>

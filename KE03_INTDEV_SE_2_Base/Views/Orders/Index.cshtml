@@ -46,22 +46,21 @@
 
                             <label>Status</label>
 
-                            <select name="status"
-                                    class="form-control">
+                            <select name="status" class="form-control">
 
-                                <option value="">
+                                <option value="" selected="@(string.IsNullOrEmpty(ViewBag.Status) ? "selected" : null)">
                                     Alle
                                 </option>
 
-                                <option value="Ontvangen">
+                                <option value="Ontvangen" selected="@(ViewBag.Status == "Received" ? "selected" : null)">
                                     Ontvangen
                                 </option>
 
-                                <option value="Verzonden">
+                                <option value="Verzonden" selected="@(ViewBag.Status == "Sent" ? "selected" : null)">
                                     Verzonden
                                 </option>
 
-                                <option value="Error">
+                                <option value="Error" selected="@(ViewBag.Status == "Error" ? "selected" : null)">
                                     Error
                                 </option>
 
@@ -86,15 +85,17 @@
         <div class="col-md-9">
 
             <div class="card">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h2>Orders</h2>
 
-                    <a asp-action="Create"
-                        class="btn btn-success">
-                        Nieuw Order
-                    </a>
-                </div>
                 <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3 mt-2 px-2">
+                        <h2 class="mb-0">Orders</h2>
+
+                        <a asp-action="Create"
+                           class="btn btn-success">
+                            Nieuw Order
+                        </a>
+                    </div>
 
                     <table class="table table-striped">
                         <thead>

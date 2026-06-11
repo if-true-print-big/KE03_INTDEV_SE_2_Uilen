@@ -4,30 +4,58 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Verwijderen</h1>
+<div class="card">
 
-<h3>Weet u zeker dat u dit wilt verwijderen?</h3>
-<div>
-    <h4>Order</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            Datum
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OrderDate)
-        </dd>
-        <dt class = "col-sm-2">
-            Klant
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Customer.Address)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Terug naar lijst</a>
-    </form>
+    <div class="card-header bg-danger text-white">
+        <h1>Verwijderen</h1>
+
+        <h4>Order</h4>
+    </div>
+
+    <div class="card-body">
+
+        <h5 class="text-danger">
+            Weet u zeker dat u dit wilt verwijderen?
+        </h5>
+
+        <hr />
+
+        <dl class="row">
+
+            <dt class="col-sm-3">Order Nummer</dt>
+            <dd class="col-sm-9">@Model.Id</dd>
+
+            <dt class="col-sm-3">Adres</dt>
+            <dd class="col-sm-9">@Model.Customer.Address</dd>
+
+            <dt class="col-sm-3">Klant</dt>
+            <dd class="col-sm-9">@Model.Customer.Name</dd>
+
+            <dt class="col-sm-3">Status</dt>
+            <dd class="col-sm-9">@Model.Status</dd>
+
+        </dl>
+
+    </div>
+
+    <div class="card-footer">
+
+        <form asp-action="Delete">
+
+            <input type="hidden"
+                   asp-for="Id" />
+
+            <input type="submit"
+                   value="Bevestigen"
+                   class="btn btn-danger" />
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+                Terug naar Lijst
+            </a>
+
+        </form>
+
+    </div>
+
 </div>
