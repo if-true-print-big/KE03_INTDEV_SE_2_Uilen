@@ -22,13 +22,7 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             </div>
-            <div class="productInfo2">
-            <div class="form-group">
-                <label asp-for="Description" class="control-label">Beschrijving</label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            </div>
+            
             <div class="productInfo2">
             <div class="form-group">
                 <label asp-for="Price" class="control-label">Prijs</label>
@@ -41,13 +35,22 @@
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
             </div>
+            <div class="productInfo2">
             <div class="form-group">
                 <label asp-for="MinimumStock" class="control-label">Minimum Voorraad</label>
                 <input asp-for="MinimumStock" class="form-control" />
                 <span asp-validation-for="MinimumStock" class="text-danger"></span>
             </div>
             </div>
-           
+            </div>
+            <div class="productInfo3">
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label">Beschrijving</label>
+                    <textarea class="form-control" id="Description" rows="3"></textarea>
+                    
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Bevestigen" class="btn btn-primary" />
             </div>

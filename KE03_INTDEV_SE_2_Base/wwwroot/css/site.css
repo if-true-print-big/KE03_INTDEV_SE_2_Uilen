@@ -64,11 +64,18 @@ main {
     flex-direction: row;
     align-items: flex-start;
     gap: 20px;
+    width: 800px;
 }
 
 .productInfo2 {
     width: 700px;
     margin-right: 15px;
+}
+
+.productInfo3 {
+    width: 700px;
+    margin: 20px;
+    margin-left: 0px;
 }
 
 /*Deze classes zijn, met een paar aanpassingen, gekopieerd van https://www.w3schools.com/w3css/5/w3.css */
