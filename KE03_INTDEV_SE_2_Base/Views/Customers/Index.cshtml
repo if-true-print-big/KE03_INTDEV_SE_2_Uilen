@@ -4,10 +4,21 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Klanten</h1>
+
+<form method="get" asp-action="Index" class="mb-3">
+    <input type="text" name="name" placeholder="Filter op naam" value="@Context.Request.Query["name"]" />
+    <input type="text" name="address" placeholder="Filter op adres" value="@Context.Request.Query["address"]" />
+    <select name="active">
+        <option value="true" selected="@(Context.Request.Query["active"] == "true")">Actief</option>
+        <option value="false" selected="@(Context.Request.Query["active"] == "false")">Inactief</option>
+    </select>
+    <button type="submit">Filter</button>
+    <a asp-action="Index">Reset</a>
+</form>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Nieuwe klant</a>
 </p>
 <table class="table">
     <thead>
@@ -37,9 +48,9 @@
                 @Html.DisplayFor(modelItem => item.Active)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Bewerken</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Verwijderen</a>
             </td>
         </tr>
 }
