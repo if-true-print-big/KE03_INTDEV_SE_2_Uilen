@@ -41,22 +41,24 @@
                     <div asp-validation-summary="All"
                          class="text-danger">
                     </div>
+
+                    <div class="card-footer">
+
+                        <input type="submit"
+                               value="Opslaan"
+                               class="btn btn-primary" />
+
+                        <a asp-action="Index"
+                           class="btn btn-secondary">
+                            Terug naar Lijst
+                        </a>
+
+                    </div>
                 </form>
             </div>
         </div>
     </div>
-    <div class="card-footer">
-
-        <input type="submit"
-               value="Opslaan"
-               class="btn btn-primary" />
-
-        <a asp-action="Index"
-           class="btn btn-secondary">
-            Terug naar Lijst
-        </a>
-
-    </div>
+    
 </div>
 
 
