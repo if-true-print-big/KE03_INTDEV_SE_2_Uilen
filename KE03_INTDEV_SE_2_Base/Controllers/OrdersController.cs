@@ -69,6 +69,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
 
             var order = await _context.Orders
                 .Include(o => o.Customer)
+                .Include(o => o.Products)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
             {
