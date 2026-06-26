@@ -62,11 +62,11 @@
                 </thead>
 
                 <tbody>
-                    @foreach(Product product in Model.Products)
+                    @foreach(OrderProduct orderproduct in Model.OrderProducts)
                     {
                         <tr>
                             <td>
-                                @product.Name
+                                @orderproduct.Product.Name @orderproduct.Quantity stuk(s)
                             </td>
                         </tr>
                     }
