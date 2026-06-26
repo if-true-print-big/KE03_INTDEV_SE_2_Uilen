@@ -78,6 +78,12 @@ main {
     margin-left: 0px;
 }
 
+.simpleFlexbox
+{
+    display: flex;
+}
+
+
 /*Deze classes zijn, met een paar aanpassingen, gekopieerd van https://www.w3schools.com/w3css/5/w3.css */
 .w3-sidebar {
     top: 57px;
