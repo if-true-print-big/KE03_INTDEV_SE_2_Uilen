@@ -20,9 +20,20 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         }
 
         // GET: Customers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string name, string address, bool? active)
         {
-            return View(await _context.Customers.ToListAsync());
+            var customers = _context.Customers.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(name))
+                customers = customers.Where(c => c.Name.Contains(name));
+
+            if (!string.IsNullOrWhiteSpace(address))
+                customers = customers.Where(c => c.Address.Contains(address));
+
+            if (active.HasValue)
+                customers = customers.Where(c => c.Active == active.Value);
+
+            return View(await customers.ToListAsync());
         }
 
         // GET: Customers/Details/5
@@ -44,6 +55,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
             }
 
             return View(customer);
+
         }
 
         // GET: Customers/Create
@@ -52,9 +64,6 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
             return View();
         }
 
-        // POST: Customers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Address,Active")] Customer customer)
@@ -84,9 +93,6 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
             return View(customer);
         }
 
-        // POST: Customers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,Active")] Customer customer)
