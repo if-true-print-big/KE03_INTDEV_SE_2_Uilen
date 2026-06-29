@@ -2,7 +2,7 @@ using DataAccessLayer;
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Repositories;
 using Microsoft.EntityFrameworkCore;
-
+//TODO: soms wordt het adres van een klant gebruikt als zijn id? dit moet opgelost worden
 namespace KE03_INTDEV_SE_2_Base
 {
     public class Program

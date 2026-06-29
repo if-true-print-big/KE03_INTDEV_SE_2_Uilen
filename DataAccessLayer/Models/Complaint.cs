@@ -16,7 +16,7 @@ namespace DataAccessLayer.Models
         public enum ComplaintStatus
         {
             Open,
-            Resolved
+            Afgehandeld
         }
 
         public ComplaintStatus Status { get; set; }

@@ -1,4 +1,5 @@
 ﻿@model DataAccessLayer.Models.Order
+@using DataAccessLayer.Models
 
 @{
     ViewData["Title"] = "Details";
@@ -11,61 +12,80 @@
     </div>
 
     <div class="card-body">
+        <div class="simpleFlexbox">
+            <dl class="row">
 
-        <dl class="row">
+                <dt class="col-sm-3">
+                    Order Nummer
+                </dt>
+                <dd class="col-sm-9">
+                    @Model.Id
+                </dd>
 
-            <dt class="col-sm-3">
-                Order Number
-            </dt>
-            <dd class="col-sm-9">
-                @Model.Id
-            </dd>
+                <dt class="col-sm-3">
+                    Order Datum
+                </dt>
+                <dd class="col-sm-9">
+                    @Model.OrderDate
+                </dd>
 
-            <dt class="col-sm-3">
-                Order Date
-            </dt>
-            <dd class="col-sm-9">
-                @Model.OrderDate
-            </dd>
+                <dt class="col-sm-3">
+                    Status
+                </dt>
+                <dd class="col-sm-9">
+                    @Model.Status
+                </dd>
 
-            <dt class="col-sm-3">
-                Status
-            </dt>
-            <dd class="col-sm-9">
-                @Model.Status
-            </dd>
+                <dt class="col-sm-3">
+                    Klant
+                </dt>
+                <dd class="col-sm-9">
+                    @Model.Customer?.Name
+                </dd>
 
-            <dt class="col-sm-3">
-                Customer
-            </dt>
-            <dd class="col-sm-9">
-                @Model.Customer?.Name
-            </dd>
+                <dt class="col-sm-3">
+                    Adres
+                </dt>
+                <dd class="col-sm-9">
+                    @Model.Customer?.Address
+                </dd>
 
-            <dt class="col-sm-3">
-                Address
-            </dt>
-            <dd class="col-sm-9">
-                @Model.Customer?.Address
-            </dd>
+            </dl>
 
-        </dl>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td class="fw-bold">
+                            Producten
+                        </td>
+                    </tr>
+                </thead>
 
+                <tbody>
+                    @foreach(OrderProduct orderproduct in Model.OrderProducts)
+                    {
+                        <tr>
+                            <td>
+                                @orderproduct.Product.Name @orderproduct.Quantity stuk(s)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div class="card-footer">
-
         <a asp-action="Edit"
-           asp-route-id="@Model.Id"
+           asp-route-id="@Model?.Id"
            class="btn btn-warning">
-            Edit
+            Bewerken
         </a>
 
         <a asp-action="Index"
            class="btn btn-secondary">
-            Back
+            Terug
         </a>
-
     </div>
 
 </div>
