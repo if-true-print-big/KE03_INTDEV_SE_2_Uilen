@@ -19,7 +19,9 @@ namespace DataAccessLayer.Models
         {
             Ontvangen,
             Verzonden,
-            Error
+            Error,
+            InRek,
+            Bevestigd,
         }
 
         public OrderStatus Status { get; set; }
