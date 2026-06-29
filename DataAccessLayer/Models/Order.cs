@@ -17,8 +17,8 @@ namespace DataAccessLayer.Models
 
         public enum OrderStatus
         {
-            Received,
-            Sent,
+            Ontvangen,
+            Verzonden,
             Error
         }
 
@@ -26,6 +26,6 @@ namespace DataAccessLayer.Models
 
         public Customer? Customer { get; set; }
 
-        public ICollection<Product> Products { get; set; } = new List<Product>();
-    }
+		public ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
+	}
 }

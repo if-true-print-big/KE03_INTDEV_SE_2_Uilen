@@ -5,9 +5,8 @@
 }
 <div class="card shadow-sm">
     <div class="card-header">
-        <h1>Create</h1>
+        <h1>Nieuwe Order</h1>
 
-        <h4>Order</h4>
     </div>
     <div class="card-body">
 
@@ -17,36 +16,42 @@
                 <form asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="OrderDate" class="control-label"></label>
+                        <label asp-for="OrderDate" class="control-label">Datum</label>
                         <input asp-for="OrderDate" class="form-control" />
                         <span asp-validation-for="OrderDate" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="CustomerId" class="control-label"></label>
+                        <label class="control-label">Address</label>
                         <select asp-for="CustomerId" class ="form-control" asp-items="ViewBag.CustomerId"></select>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Status"></label>
+                        <label asp-for="Status">Status</label>
 
                         <select asp-for="Status" class="form-control">
-                            <option value="Received">Received</option>
-                            <option value="Sent">Sent</option>
-                            <option value="Error">Something went wrong</option>
+                            <option value="Ontvangen">Ontvangen</option>
+                            <option value="Verzonden">Verzonden</option>
+                            <option value="Error">Error</option>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-primary" />
                     </div>
                     <div asp-validation-summary="All"
                          class="text-danger">
                     </div>
+
+                    <div class="card-footer">
+
+                        <input type="submit"
+                               value="Bevestigen"
+                               class="btn btn-primary" />
+
+                        <a asp-action="Index"
+                           class="btn btn-secondary">
+                            Terug naar Lijst
+                        </a>
+                    </div>
                 </form>
             </div>
         </div>
-
-        <div>
-            <a asp-action="Index">Back to List</a>
-        </div>
+        
     </div>
 </div>
 @section Scripts {

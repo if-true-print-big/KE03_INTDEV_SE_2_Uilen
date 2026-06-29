@@ -19,17 +19,14 @@ namespace DataAccessLayer.Models
 
         public decimal Price { get; set; }
 
-
-        //this is the minimum amound the company can hold of a product before it gets added to a special list to help the admins keep stock.
-        //TODO actually make this list
         public int? MinimumStock { get; set; }
 
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
 
-        public ICollection<Order> Orders { get; } = new List<Order>();
+		public ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
 
-        public ICollection<Part> Parts { get; } = new List<Part>();
+		public ICollection<Part> Parts { get; } = new List<Part>();
 
         public ICollection<Review> Reviews { get; set; } = new List<Review>();
 

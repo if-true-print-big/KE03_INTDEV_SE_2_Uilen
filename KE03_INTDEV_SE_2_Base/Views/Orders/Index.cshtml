@@ -21,14 +21,14 @@
                     <form asp-action="Index" method="get">
 
                         <div class="mb-3">
-                            <label>Order Number</label>
+                            <label>Order Nummer</label>
                             <input name="orderNumber"
                                    value="@ViewBag.OrderNumber"
                                    class="form-control" />
                         </div>
 
                         <div class="mb-3">
-                            <label>Customer Name</label>
+                            <label>Naam Klant</label>
 
                             <input name="customerName"
                                    value="@ViewBag.CustomerName"
@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label>Address</label>
+                            <label>Adres</label>
                             <input name="address"
                                    value="@ViewBag.Address"
                                    class="form-control" />
@@ -46,23 +46,22 @@
 
                             <label>Status</label>
 
-                            <select name="status"
-                                    class="form-control">
+                            <select name="status" class="form-control">
 
-                                <option value="">
-                                    All
+                                <option value="" selected="@(string.IsNullOrEmpty(ViewBag.Status) ? "selected" : null)">
+                                    Alle
                                 </option>
 
-                                <option value="Received">
-                                    Received
+                                <option value="Ontvangen" selected="@(ViewBag.Status == "Ontvangen" ? "selected" : null)">
+                                    Ontvangen
                                 </option>
 
-                                <option value="Sent">
-                                    Sent
+                                <option value="Verzonden" selected="@(ViewBag.Status == "Verzonden" ? "selected" : null)">
+                                    Verzonden
                                 </option>
 
-                                <option value="Error">
-                                    Something went wrong
+                                <option value="Error" selected="@(ViewBag.Status == "Error" ? "selected" : null)">
+                                    Error
                                 </option>
 
                             </select>
@@ -70,7 +69,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary">
-                            Search
+                            Zoek
                         </button>
 
                         <a asp-action="Index" class="btn btn-secondary">
@@ -86,23 +85,25 @@
         <div class="col-md-9">
 
             <div class="card">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h2>Orders</h2>
 
-                    <a asp-action="Create"
-                        class="btn btn-success">
-                        Create Order
-                    </a>
-                </div>
                 <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3 mt-2 px-2">
+                        <h2 class="mb-0">Orders</h2>
+
+                        <a asp-action="Create"
+                           class="btn btn-success">
+                            Nieuw Order
+                        </a>
+                    </div>
 
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Order Number</th>
-                                <th>Order Date</th>
-                                <th>Customer</th>
-                                <th>Address</th>
+                                <th>Order Nummer</th>
+                                <th>Order Datum</th>
+                                <th>Klant</th>
+                                <th>Adres</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -127,13 +128,13 @@
                                         <a asp-action="Edit"
                                             asp-route-id="@item.Id"
                                             class="btn btn-outline-warning btn-sm">
-                                            Edit
+                                            Bewerken
                                         </a>
 
                                         <a asp-action="Delete"
                                             asp-route-id="@item.Id"
                                             class="btn btn-outline-danger btn-sm">
-                                            Delete
+                                            Verwijderen
                                         </a>
                                     </td>
                                 </tr>
