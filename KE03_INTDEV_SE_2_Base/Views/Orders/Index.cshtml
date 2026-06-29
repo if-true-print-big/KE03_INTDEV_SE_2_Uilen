@@ -60,6 +60,14 @@
                                     Verzonden
                                 </option>
 
+                                <option value="InRek" selected="@(ViewBag.Status == "Inrek" ? "selected" : null)">
+                                    InRek
+                                </option>
+
+                                <option value="Bevestigd" selected="@(ViewBag.Status == "Bevestigd" ? "selected" : null)">
+                                    Bevesigd
+                                </option>
+
                                 <option value="Error" selected="@(ViewBag.Status == "Error" ? "selected" : null)">
                                     Error
                                 </option>
