@@ -20,7 +20,7 @@
 <p>
     <a asp-action="Create">Nieuwe klant</a>
 </p>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>
@@ -48,9 +48,23 @@
                 @Html.DisplayFor(modelItem => item.Active)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Bewerken</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Verwijderen</a>
+                <a asp-action="Edit" 
+                    asp-route-id="@item.Id"
+                    class="btn btn-outline-primary btn-sm"> 
+                    Bewerken
+                </a>
+
+                <a asp-action="Details" 
+                    asp-route-id="@item.Id"
+                    class="btn btn-outline-warning btn-sm">
+                    Details
+                </a> 
+
+                <a asp-action="Delete"
+                    asp-route-id="@item.Id"
+                    class="btn btn-outline-danger btn-sm">
+                    Verwijderen
+                </a>
             </td>
         </tr>
 }
