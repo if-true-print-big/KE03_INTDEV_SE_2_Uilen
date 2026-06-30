@@ -41,6 +41,28 @@
                                    value="@ViewBag.Address"
                                    class="form-control" />
                         </div>
+
+                        <div class="border rounded p-2 mb-3">
+
+                            <h6>Periode</h6>
+
+                            <div class="mb-2">
+                                <label>Van</label>
+                                <input type="date"
+                                       name="fromDate"
+                                       value="@ViewBag.FromDate"
+                                       class="form-control" />
+                            </div>
+
+                            <div>
+                                <label>Tot</label>
+                                <input type="date"
+                                       name="toDate"
+                                       value="@ViewBag.ToDate"
+                                       class="form-control" />
+                            </div>
+
+                        </div>
                                                 
                         <div class="mb-3">
 
@@ -61,11 +83,11 @@
                                 </option>
 
                                 <option value="InRek" selected="@(ViewBag.Status == "Inrek" ? "selected" : null)">
-                                    InRek
+                                    KVV
                                 </option>
 
                                 <option value="Bevestigd" selected="@(ViewBag.Status == "Bevestigd" ? "selected" : null)">
-                                    Bevesigd
+                                    Bevestigd
                                 </option>
 
                                 <option value="Error" selected="@(ViewBag.Status == "Error" ? "selected" : null)">
@@ -76,6 +98,7 @@
 
                         </div>
 
+                        
                         <button type="submit" class="btn btn-primary">
                             Zoek
                         </button>
@@ -121,28 +144,34 @@
                             {
                                 <tr>
                                     <td>@item.Id</td>
-                                    <td>@item.OrderDate</td>
+                                    <td>@item.OrderDate.ToString("dd-MM-yyyy")</td>
                                     <td>@item.Customer?.Name</td>
                                     <td>@item.Customer?.Address</td>
-                                    <td>@item.Status</td>
-
+                                    <td>
+                                        @(item.Status == DataAccessLayer.Models.Order.OrderStatus.InRek
+                                            ? "KVV"
+                                            : item.Status.ToString())
+                                    </td>
                                     <td>
                                         <a asp-action="Details"
-                                            asp-route-id="@item.Id"
-                                            class="btn btn-outline-primary btn-sm">
-                                            Details
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-outline-primary btn-sm"
+                                           title="Details">
+                                            👁️
                                         </a>
 
                                         <a asp-action="Edit"
-                                            asp-route-id="@item.Id"
-                                            class="btn btn-outline-warning btn-sm">
-                                            Bewerken
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-outline-warning btn-sm"
+                                           title="Bewerken">
+                                            ✏️
                                         </a>
 
                                         <a asp-action="Delete"
-                                            asp-route-id="@item.Id"
-                                            class="btn btn-outline-danger btn-sm">
-                                            Verwijderen
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-outline-danger btn-sm"
+                                           title="Verwijderen">
+                                            🗑️
                                         </a>
                                     </td>
                                 </tr>
