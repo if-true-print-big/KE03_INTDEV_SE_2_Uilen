@@ -5,18 +5,21 @@
 
 <h1>Dringende zaken</h1>
 <br />
-<h4>Lage Voorraad</h4>
-<p>Er zijn @Model.numberOfProductsWithLowStock product(en) met een lage voorraad. 
+<div class="alert alert-info">
+    <strong>Lage vooraad</strong><br />
+    Er zijn @Model.numberOfProductsWithLowStock product(en) met een lage voorraad.
     <a asp-area="" asp-controller="ProductStock" asp-action="Index">Naar Voorraad</a>
-</p>
+</div>
 
-<h4>Bestellingen met problemen</h4>
-<p>Er zijn @Model.numberOfOrdersWithErrorStatus order(s) met de status "Error".
-    <a asp-area="" asp-controller="Orders" asp-action="Index">Naar Orders</a>
-</p>
+<div class="alert alert-info">
+    <strong>Nieuwe bestelling!</strong><br />
+    Er zijn @Model.numberOfOrdersWithErrorStatus nieuwe bestellingen die wachten op bevestiging door een bezorger.
+    <a asp-area="" asp-controller="Orders" asp-action="PackageHandling">Naar Pakket Afhandelen</a>
+</div>
 
-<h4>Open klachten</h4>
-<p>
+
+<div class="alert alert-info">
+    <strong>Open Klachten</strong><br  />
     Er zijn @Model.numberOfOrdersWithErrorStatus klacht(en) met de status "Open".
     <a asp-area="" asp-controller="Complaints" asp-action="Index">Naar Klachten</a>
-</p>
+</div>

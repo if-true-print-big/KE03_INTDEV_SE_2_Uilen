@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using static DataAccessLayer.Models.Order;
 
@@ -21,7 +22,7 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         }
 
         // GET: Orders
-        public async Task<IActionResult> Index(string orderNumber, string address, string customerName, string status)
+        public async Task<IActionResult> Index(string orderNumber, string address, string customerName, string status, DateTime? fromDate, DateTime? toDate)
         {
             var orders = _context.Orders
                 .Include(o => o.Customer)
@@ -32,7 +33,6 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
                 orders = orders.Where(o => o.Id == id);
             }
             
-            // Address filter
             if (!string.IsNullOrWhiteSpace(address))
             {
                 orders = orders.Where(o =>
@@ -45,6 +45,17 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
                     o.Customer.Name.Contains(customerName));
             }
 
+            if (fromDate.HasValue)
+            {
+                orders = orders.Where(o => o.OrderDate >= fromDate.Value);
+            }
+
+            if (toDate.HasValue)
+            {
+                orders = orders.Where(o => o.OrderDate <= toDate.Value);
+            }           
+
+
             if (!string.IsNullOrWhiteSpace(status) &&
                 Enum.TryParse<Order.OrderStatus>(status, out var selectedStatus))
             {
@@ -54,6 +65,8 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
             ViewBag.OrderNumber = orderNumber;
             ViewBag.Address = address;
             ViewBag.CustomerName = customerName;
+            ViewBag.FromDate = fromDate?.ToString("yyyy-MM-dd");
+            ViewBag.ToDate = toDate?.ToString("yyyy-MM-dd"); 
             ViewBag.Status = status;
 
             return View(await orders.ToListAsync());
@@ -72,6 +85,26 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
                 .Include(o => o.OrderProducts)
                     .ThenInclude(op => op.Product)
                 .FirstOrDefaultAsync(m => m.Id == id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
+        public async Task<IActionResult> PackageDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var order = await _context.Orders
+                .Include(o => o.Customer)
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
             if (order == null)
             {
                 return NotFound();
@@ -194,6 +227,16 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         private bool OrderExists(int id)
         {
             return _context.Orders.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> PackageHandling()
+        {
+            var orders = await _context.Orders
+                .Include(o => o.Customer)
+                .Where(o => o.Status == Order.OrderStatus.Bevestigd)
+                .ToListAsync();
+
+            return View(orders);
         }
     }
 }

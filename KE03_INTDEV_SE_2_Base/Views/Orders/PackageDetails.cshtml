@@ -1,0 +1,144 @@
+﻿@model DataAccessLayer.Models.Order
+@using DataAccessLayer.Models
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="card shadow-sm">
+
+    <div class="card-header">
+        <h3>Order Details</h3>
+    </div>
+
+    <div class="card-body">
+        <div class="simpleFlexbox">
+            <dl class="row">
+
+                <dt class="col-sm-3">
+                    Order Nummer
+                </dt>
+                <dd class="col-sm-9">
+                    @Model.Id
+                </dd>
+
+                <dt class="col-sm-3">
+                    Order Datum
+                </dt>
+                <dd class="col-sm-9">
+                    @Model.OrderDate
+                </dd>
+
+                <dt class="col-sm-3">
+                    Status
+                </dt>
+                <dd class="col-sm-9">
+                    @Model.Status
+                </dd>
+
+                <dt class="col-sm-3">
+                    Klant
+                </dt>
+                <dd class="col-sm-9">
+                    @Model.Customer?.Name
+                </dd>
+
+                <dt class="col-sm-3">
+                    Adres
+                </dt>
+                <dd class="col-sm-9">
+                    @Model.Customer?.Address
+                </dd>
+
+            </dl>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td class="fw-bold">
+                            Producten
+                        </td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Aantal</th>
+                                <th>Gepakt</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (OrderProduct orderproduct in Model.OrderProducts)
+                            {
+                                <tr>
+                                    <td>@orderproduct.Product.Name</td>
+
+                                    <td>@orderproduct.Quantity</td>
+
+                                    <td>
+                                        <input class="packageCheck"
+                                               type="checkbox" />
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card-footer">
+
+        <button id="finishOrder"
+                class="btn btn-success">
+            Afhandelen Order
+        </button>
+
+        <button class="btn btn-primary"
+                onclick="alert('Bezorger wordt toegewezen (demo).')">
+            Toewijzen aan bezorger
+        </button>
+
+        <a asp-action="PackageHandling"
+           class="btn btn-secondary">
+            Terug
+        </a>
+
+    </div>
+
+    <script>
+
+            document.getElementById("finishOrder").addEventListener("click", function () {
+
+                const checks = document.querySelectorAll(".packageCheck");
+
+                let allChecked = true;
+
+                checks.forEach(c => {
+                    if (!c.checked)
+                        allChecked = false;
+                });
+
+                if (!allChecked)
+                {
+                    alert("Niet alle producten zijn afgevinkt!");
+                    return;
+                }
+
+                alert("Order succesvol afgehandeld!");
+
+                window.location.href='@Url.Action("PackageHandling", "Orders")';
+
+            });
+
+    </script>
+</div>
+    
