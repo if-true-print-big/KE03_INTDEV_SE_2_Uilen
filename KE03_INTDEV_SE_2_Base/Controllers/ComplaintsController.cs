@@ -161,5 +161,27 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
         {
             return _context.Complaints.Any(e => e.Id == id);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ToggleStatus(int id)
+        {
+            var complaint = await _context.Complaints.FindAsync(id);
+            if (complaint == null)
+                return NotFound();
+
+            if (complaint.Status == Complaint.ComplaintStatus.Open)
+            {
+                complaint.Status = Complaint.ComplaintStatus.Afgehandeld;
+            }
+            else
+            {
+                complaint.Status = Complaint.ComplaintStatus.Open;
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Details), new { id });
+        }
     }
 }
+
+   

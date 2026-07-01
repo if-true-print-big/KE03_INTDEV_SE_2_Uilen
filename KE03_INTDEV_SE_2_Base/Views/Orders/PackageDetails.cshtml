@@ -15,52 +15,45 @@
         <div class="simpleFlexbox">
             <dl class="row">
 
-                <dt class="col-sm-3">
+                <dt class="col-md-5 text-nowrap">
                     Order Nummer
                 </dt>
-                <dd class="col-sm-9">
+                <dd class="col-md-7 text-nowrap">
                     @Model.Id
                 </dd>
 
-                <dt class="col-sm-3">
+                <dt class="col-md-5 text-nowrap">
                     Order Datum
                 </dt>
-                <dd class="col-sm-9">
+                <dd class="col-md-7 text-nowrap">
                     @Model.OrderDate
                 </dd>
 
-                <dt class="col-sm-3">
+                <dt class="col-md-5 text-nowrap">
                     Status
                 </dt>
-                <dd class="col-sm-9">
+                <dd class="col-md-7 text-nowrap">
                     @Model.Status
                 </dd>
 
-                <dt class="col-sm-3">
+                <dt class="col-md-5 text-nowrap">
                     Klant
                 </dt>
-                <dd class="col-sm-9">
+                <dd class="col-md-7 text-nowrap">
                     @Model.Customer?.Name
                 </dd>
 
-                <dt class="col-sm-3">
+                <dt class="col-md-5 text-nowrap">
                     Adres
                 </dt>
-                <dd class="col-sm-9">
+                <dd class="col-md-7 text-nowrap">
                     @Model.Customer?.Address
                 </dd>
 
             </dl>
 
             <table class="table">
-                <thead>
-                    <tr>
-                        <td class="fw-bold">
-                            Producten
-                        </td>
-                    </tr>
-                </thead>
-
+                
                 <tbody>
                     <table class="table">
                         <thead>
