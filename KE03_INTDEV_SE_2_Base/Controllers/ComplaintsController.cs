@@ -181,7 +181,15 @@ namespace KE03_INTDEV_SE_2_Base.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Details), new { id });
         }
-    }
+
+		public async Task<IActionResult> OpenComplaints()
+		{
+            var openComplaints = _context.Complaints
+                .Include(c => c.Customer)
+                .Where(c => c.Status == Complaint.ComplaintStatus.Open);
+			return View(await openComplaints.ToListAsync());
+		}
+	}
 }
 
    

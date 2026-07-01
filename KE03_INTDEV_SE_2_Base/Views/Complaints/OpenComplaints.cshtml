@@ -1,0 +1,53 @@
+﻿@model IEnumerable<DataAccessLayer.Models.Complaint>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Klachten</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Beschrijving
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Klant
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.Name)
+                </td>
+                <td>
+                    <a asp-action="Details"
+                       asp-route-id="@item.Id"
+                       class="btn btn-outline-primary btn-sm">
+                        👁️
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@item.Id"
+                       class="btn btn-outline-danger btn-sm">
+                        🗑️
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
